@@ -14,8 +14,19 @@ model {
          * native build settings: taking default for almost everything
          */
         ndk {
-            moduleName = 'hello-jni'
+            moduleName = 'jni-demo'
+            ldLibs.add("log")
+            /*abiFilters  ["arm7"]*/
             CFlags.addAll(['-Wall', '-Werror'])
+        }
+        sources {
+            main {
+                jni {
+                    source {
+                        srcDir "src/main/jni"
+                    }
+                }
+            }
         }
         buildTypes {
             release {

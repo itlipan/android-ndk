@@ -16,6 +16,7 @@
 package com.example.hellojni;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.TextView;
 import android.os.Bundle;
 
@@ -33,17 +34,24 @@ public class HelloJni extends Activity
          * function.
          */
         TextView  tv = new TextView(this);
-        tv.setText( stringFromJNI() );
+        tv.setText( JniUtil.getPersonName());
         setContentView(tv);
+        int [] data = {1,2,3,4};
+        int [] result = JniUtil.updateIntArray(data);
+        for (int i = 0; i < result.length; i++) {
+            Log.d("Result","result>>>"+result[i]);
+        }
+
+        JniUtil.updateFilePath("/mnt/sdcard/jnidemo.txt");
     }
 
     /* A native method that is implemented by the
      * 'hello-jni' native library, which is packaged
      * with this application.
-     */
+     *//*
     public native String  stringFromJNI();
 
-    /* This is another native method declaration that is *not*
+    *//* This is another native method declaration that is *not*
      * implemented by 'hello-jni'. This is simply to show that
      * you can declare as many native methods in your Java code
      * as you want, their implementation is searched in the
@@ -52,15 +60,15 @@ public class HelloJni extends Activity
      *
      * Trying to call this function will result in a
      * java.lang.UnsatisfiedLinkError exception !
-     */
+     *//*
     public native String  unimplementedStringFromJNI();
 
-    /* this is used to load the 'hello-jni' library on application
+    *//* this is used to load the 'hello-jni' library on application
      * startup. The library has already been unpacked into
      * /data/data/com.example.hellojni/lib/libhello-jni.so at
      * installation time by the package manager.
-     */
+     *//*
     static {
         System.loadLibrary("hello-jni");
-    }
+    }*/
 }
